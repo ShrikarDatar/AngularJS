@@ -1,0 +1,130 @@
+<html>
+<head>
+<script>
+ 
+	//usage
+	function doReverse(){
+		var str = document.getElementById( 'mystring' ).value;
+		alert( "" + reverseString( str ) );
+	}
+	
+	//reverse function 
+	function reverseString( str ){
+		str = str.split(''); //split the entered string 
+		str = str.reverse(); //reverse the order 
+		str = str.join(''); //then join the reverse order array values
+		return str;
+	}
+	
+</script>
+</head>
+<body>
+	<h3>Reverse a String in JavaScript </h3>
+	<input type="text" id="mystring" />
+	<button id="btn" onClick="doReverse()" >Reverse</button>
+</body>
+</html>
+
+------------------------------------------------------------
+<div ng-app="mainApp">
+    <table border="1">
+        <tr>
+            <th>Course Name</th>
+            <th>Course Code</th>
+            <th>Credits</th>
+        </tr>
+        <tr ng-repeat="course in courses">
+            <td>{{course.cname}}</td>
+            <td>{{course.code}}</td>
+            <td>{{course.credits}}</td>
+        </tr>
+    </table>
+</div>
+--------------------------------------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="b.js"></script>
+</head>
+<body ng-app="mainApp" ng-controller="subjectController">
+    <table border="1">
+        <tr>
+            <th>subject Name</th>
+            <th>subject Code</th>
+            <th>Credits</th>
+        </tr>
+        <tr ng-repeat="subject in subjects">
+            <td>{{subject.sname}}</td>
+            <td>{{subject.code}}</td>
+            <td>{{subject.credits}}</td>
+        </tr>
+    </table>
+</body>
+</html>
+--------------------------------------------
+
+<div>
+<a href="#/course">Course</a><br>
+<a href="#/subject">Subject</a>
+</div>
+---------------------
+<html>
+	<head lang="en">
+	  <meta charset="utf-8">
+	  <title>AngularJS Routing</title>
+
+	</head>
+	<body>
+
+	  <div ng-app="mainApp">
+		<ng-view></ng-view>
+	  </div>
+
+	  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28/angular.min.js"></script>
+	  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28//angular-route.min.js"></script>
+	  <script type="text/javascript" src="b.js"></script>
+	</body>
+</html>
+------------------------------
+var mainApp = angular.module("mainApp", ['ngRoute']);
+
+mainApp.config(function($routeProvider) {
+    $routeProvider
+    .when('/', {
+        templateUrl: 'set.html',
+        
+    })
+		.when('/course', {
+			templateUrl: 'course.html',
+			controller: 'courseController'
+		})
+		.when('/subject', {
+			templateUrl: 'subject.html',
+			controller: 'subjectController'
+		})
+		.otherwise({
+			redirectTo: '/'
+		});
+});
+
+mainApp.controller('courseController', function($scope) {
+	$scope.courses = [
+		{cname: 'Msc', code:'111',credits:20},
+		{cname: 'MCA', code:'112',credits:25},
+		{cname: 'BDA', code:'113',credits:30},
+	];
+
+});
+
+mainApp.controller('subjectController', function($scope) {
+	$scope.subjects = [
+		{sname: 'java', code:'11',credits:20},
+		{sname: 'python', code:'12',credits:25},
+		{sname: 'c++', code:'13',credits:30},
+	];
+
+});
