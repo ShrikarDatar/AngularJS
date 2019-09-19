@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+<head>
+    <script>
+    function armstr()
+    {
+        var arm=0,a,b,c,d,num,i;
+        num=Number(document.getElementById("no_input").value);
+        for(i=1;i<=num;i++)
+        {
+            temp=i;
+            while(temp>0)
+            {
+                a=temp%10;
+                temp=parseInt(temp/10); // convert float into Integer
+                arm=arm+(a*a*a);
+            }
+            if(arm==i)
+            {
+                document.write(i+" ");
+            }
+           arm=0;
+        }
+    }
+        
+    </script>
+</head>
+<body>
+Enter any Number: <input id="no_input">
+<button onclick="armstr()">Check</button></br></br>
+</body>
+</html>
+-----------------------------------------------------------
+<div ng-app="mainApp">
+    <table border="1">
+        <tr>
+            <th>book Name</th>
+            <th>book price</th>
+            <th>author</th>
+            <th>edition</th>
+        </tr>
+        <tr ng-repeat="book in book">
+            <td>{{book.bname}}</td>
+            <td>{{book.price}}</td>
+            <td>{{book.author}}</td>
+            <td>{{book.edition}}</td>
+        </tr>
+    </table>
+</div>
+---------------------------------
+<script src="books.js"></script>
+<div ng-app="mainApp">
+    <table border="1">
+        <tr>
+            <th>Mobile Name</th>
+            <th>mobile price</th>
+            
+        </tr>
+        <tr ng-repeat="mobile in mobile">
+            <td>{{mobile.mname}}</td>
+            <td>{{mobile.price|customfilter}}</td>
+            
+        </tr>
+    </table>
+</div>
+-----------------------------
+<html>
+	<head lang="en">
+	  <meta charset="utf-8">
+	  <title>AngularJS Routing</title>
+
+	</head>
+	<body>
+
+	  <div ng-app="mainApp">
+	  
+		<ng-view></ng-view>
+	  </div>
+
+	  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28/angular.min.js"></script>
+	  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28//angular-route.min.js"></script>
+	  <script type="text/javascript" src="books.js"></script>
+	</body>
+</html>
+--------------------------------------
+<div>
+<a href="#/book">book</a><br>
+<a href="#/mobile">mobile</a>
+</div>
+--------------------------------------
+// Q2.  Define an array of book objects as (bookname,price,author,edition) in bookController also        define an array of mobiles objects as  (mname,price) in mobileController
+//      Create a HTML page which will display hyperlinks as books and mobiles. When the user clicks on book hyperlink, various book details should be displayed in table. Also, when the user clicks on manager hyperlink, various subject details should be displayed in table, Use custom filter to display price as “include all tax price”.
+
+
+
+var mainApp = angular.module("mainApp", ['ngRoute']);
+
+mainApp.config(function($routeProvider) {
+    $routeProvider
+    .when('/', {
+        templateUrl: 'setb.html',
+        
+    })
+		.when('/book', {
+			templateUrl: 'book.html',
+			controller: 'bookController'
+		})
+		.when('/mobile', {
+			templateUrl: 'mobile.html',
+			controller: 'mobileController'
+		})
+		.otherwise({
+			redirectTo: '/'
+		});
+});
+
+mainApp.controller('bookController', function($scope) {
+	$scope.book = [
+		{bname: 'Msc', price:'111',author:20,edition:2},
+		{bname: 'MCA', price:'111',author:34,edition:1},
+		{bname: 'Msc', price:'111',author:20,edition:2},
+	];
+
+});
+
+mainApp.controller('mobileController', function($scope) {
+	$scope.mobile = [
+		{mname: 'apple', price:232},
+		{mname: 'apple', price:232},
+		{mname: 'apple', price:232},
+	];
+
+});
+
+mainApp.filter("customfilter",function(){
+    return function(input){
+        return "all taxes"+input;
+    }
+});
+
