@@ -1,0 +1,209 @@
+
+<html>
+    <head>
+        <script type="text/javascript">
+            function Result() 
+            {
+                var total=0
+                var ans=new Array();
+                ans=[7,28,9,0,3]
+                for(i=0;i<5;i++)
+                {
+                    var rno=document.getElementsByName("q1");
+                        for(j=0;j<rno.length;j++)
+                        {
+                            if(rno[j].checked)
+                            {
+                                if(rno[j].value==ans[0])
+                                    total++;
+                            }
+                        }
+                }
+
+                var rno=document.getElementsByName("q2");
+                    for(j=0;j<rno.length;j++)
+                    {
+                        if(rno[j].checked)
+                        {
+                            if(rno[j].value==ans[1])
+                                total++;
+                        }
+                    }
+
+                var rno=document.getElementsByName("q3");
+                    for(j=0;j<rno.length;j++)
+                    {
+                        if(rno[j].checked)
+                        {
+                            if(rno[j].value==ans[2])
+                                total++;
+                        }
+                    }
+
+                var rno=document.getElementsByName("q4");
+                    for(j=0;j<rno.length;j++)
+                    {
+                        if(rno[j].checked)
+                        {
+                            if(rno[j].value==ans[3])
+                                total++;
+                        }
+                    }
+
+                var rno=document.getElementsByName("q5");
+                    for(j=0;j<rno.length;j++)
+                    {
+                        if(rno[j].checked)
+                        {
+                            if(rno[j].value==ans[4])
+                                total++;
+                        }
+                    }
+                document.write("Score is : "+total+" correct out of 5")
+                   
+            }
+        </script>
+    </head>
+
+    <body>
+        <h1>MCQ Quiz</h1>
+        <h4>1.No of continents on Earth</h4><br>
+            <input type="radio"  name="q1" value=6>6<br>
+            <input type="radio"  name="q1" value=7>7<br>
+            <input type="radio"  name="q1" value=8>8<br>
+            <input type="radio"  name="q1" value=9>9<br>
+            <br><br>
+        <h4>2.No of States in India</h4><br>
+            <input type="radio"  name="q2" value=28>28<br>
+            <input type="radio"  name="q2" value=27>27<br>
+            <input type="radio"  name="q2" value=29>29<br>
+            <input type="radio"  name="q2" value=26>26<br>
+        <br><br>
+
+        <h4>3.No of union territories in India</h4><br>
+            <input type="radio"  name="q3" value=6>6<br>
+            <input type="radio"  name="q3" value=7>7<br>
+            <input type="radio"  name="q3" value=8>8<br>
+            <input type="radio"  name="q3" value=9>9<br>
+            <br><br>
+        <h4>4.Programmer counting starts from</h4><br>
+            <input type="radio"  name="q4" value=1>1<br>
+            <input type="radio"  name="q4" value=0>0<br>
+            <input type="radio"  name="q4" value=3>3<br>
+            <input type="radio"  name="q4" value=8>8<br>
+        <br><br>
+        <h4>5.Time at which conjuring ghost is activated</h4><br>
+            <input type="radio"  name="q5" value=4>4 pm<br>
+            <input type="radio"  name="q5" value=5>5 pm<br>
+            <input type="radio"  name="q5" value=3>3 am<br>
+            <input type="radio"  name="q5" value=1>1 am<br>
+            <br><br>
+        <button onclick="Result()">Submit</button>
+    </body>
+</html>
+
+------------------------------------------------------------------------------
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js">
+        </script>
+        <script type="text/javascript" src="prime.js"></script>
+    </head>
+    <body ng-app="myApp" >
+        Enter no : <input type="number" ng-model="no"><br><br><br>
+        <div ng-controller="myController"><button ng-click="CheckPrime()">Check Prime</button><br><br>
+        <div ng-repeat="prime in prime">{{prime}}<br><br></div>
+        </div>
+        <div ng-controller="myctrl">
+        <button ng-click="CheckArmstrong()">Check Armstrong</button><br><br>
+        
+       <div ng-repeat="armstrong in armstrong">{{armstrong}}<br><br></div>
+        </div>
+
+    </body>
+</html>
+---------------------------------------------------
+var app=angular.module("myApp",[])
+
+app.service('primeno', function()
+{
+    this.Prime=function(num)
+    {
+       var prime=[];
+        for(var i=1;i<=num;i++)
+        {
+            var flag=0;
+            for(var j=2;j<=i/2;j++){
+                if(i%j==0)
+            {
+                flag=1;
+                break;
+            }
+
+            }
+            if(flag==0){
+                prime.push(i);
+                
+            }
+            
+        }
+        return prime;
+        
+    }
+});
+
+app.service('armstrongno', function()
+{
+    this.Armstrong=function(num)
+    {
+        var arm=0,a,b,c,d,num,i;
+        num=num;
+        var armstrong=[];
+        for(i=1;i<=num;i++)
+        {
+            arm=0;
+            temp=i;
+            while(temp>0)
+            {
+                a=temp%10;
+                temp=parseInt(temp/10); // convert float into Integer
+                arm=arm+(a*a*a);
+            }
+            if(arm==i)
+            {
+                armstrong.push(i);
+            }
+           
+        }
+        return armstrong;
+    }
+});
+
+app.controller('myController',function($scope,primeno)
+{
+   $scope.CheckPrime=function()
+   {
+        $scope.prime=primeno.Prime($scope.no);
+   }
+
+
+});
+app.controller('myctrl',function($scope,armstrongno){
+    $scope.CheckArmstrong=function()
+    {
+         $scope.armstrong=armstrongno.Armstrong($scope.no);
+    }
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
