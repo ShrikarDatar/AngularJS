@@ -45,3 +45,15 @@
     
 </body>
 </html>
+----------------------------------------
+<html>
+    <head>
+        <title>Date</title>
+    </head>
+    <body>
+        <script>
+            var d=new Date()
+            document.write(d.getDate()+"/"+d.getMonth()+"/"+d.getFullYear())
+        </script>
+    </body>
+</html>
