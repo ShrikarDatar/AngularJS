@@ -1,0 +1,16 @@
+<html>
+    <head>
+        <title>Count words in a string</title>
+        <script type="text/javascript">
+            function Count_str() {
+                str=document.getElementById('str').value
+                document.write("String length is : "+str.length)
+            }
+        </script>
+    </head>
+    <body>
+        Enter any string : <input type="text" name="str" id="str">
+        <button onclick="Count_str()">Count</button>
+    </body>
+</html>
+---------------------------------------------
