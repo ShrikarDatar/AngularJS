@@ -1,3 +1,43 @@
+<html>
+    <head>
+        <title>Record Card</title>
+    </head>
+    <body>
+        <script>
+            function Batsman(bcode,bname,innings,notout,runs)
+            {
+                this.bcode=bcode;
+                this.bname=bname;
+                this.innings=innings;
+                this.notout=notout;
+                this.runs=runs;
+
+                this.batavg=function() 
+                {
+                    return (this.runs/(this.innings-this.notout))
+                }
+                this.update=function(innings,runs,notout)
+                {
+                    this.innings=innings;
+                    this.notout=notout;
+                    this.runs=runs;
+                }
+                this.displayData=function() 
+                {
+                    return this.bcode+" "+this.bname+" "+this.innings+" "+this.runs+" "+this.notout    
+                }
+            }
+
+            var b=new Batsman(1,"Monu",20,15,350)
+            document.write("<br>"+b.batavg())
+            document.write("<br>"+b.displayData())
+            b.update(40,850,30)
+            document.write("<br>"+b.displayData())
+        </script>
+    </body>
+</html>
+
+-----------------------------------------------------------------------------------
 <!DOCTYPE html>
 <html lang="en">
 <head>
