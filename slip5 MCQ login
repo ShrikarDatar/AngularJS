@@ -1,0 +1,193 @@
+
+<html>
+    <head>
+        <script type="text/javascript">
+            function Result() 
+            {
+                var total=0
+                var ans=new Array();
+                ans=[7,28,9,0,3]
+                for(i=0;i<5;i++)
+                {
+                    var rno=document.getElementsByName("q1");
+                        for(j=0;j<rno.length;j++)
+                        {
+                            if(rno[j].checked)
+                            {
+                                if(rno[j].value==ans[0])
+                                    total++;
+                            }
+                        }
+                }
+
+                var rno=document.getElementsByName("q2");
+                    for(j=0;j<rno.length;j++)
+                    {
+                        if(rno[j].checked)
+                        {
+                            if(rno[j].value==ans[1])
+                                total++;
+                        }
+                    }
+
+                var rno=document.getElementsByName("q3");
+                    for(j=0;j<rno.length;j++)
+                    {
+                        if(rno[j].checked)
+                        {
+                            if(rno[j].value==ans[2])
+                                total++;
+                        }
+                    }
+
+                var rno=document.getElementsByName("q4");
+                    for(j=0;j<rno.length;j++)
+                    {
+                        if(rno[j].checked)
+                        {
+                            if(rno[j].value==ans[3])
+                                total++;
+                        }
+                    }
+
+                var rno=document.getElementsByName("q5");
+                    for(j=0;j<rno.length;j++)
+                    {
+                        if(rno[j].checked)
+                        {
+                            if(rno[j].value==ans[4])
+                                total++;
+                        }
+                    }
+                document.write("Score is : "+total+" correct out of 5")
+                   
+            }
+        </script>
+    </head>
+
+    <body>
+        <h1>MCQ Quiz</h1>
+        <h4>1.No of continents on Earth</h4><br>
+            <input type="radio"  name="q1" value=6>6<br>
+            <input type="radio"  name="q1" value=7>7<br>
+            <input type="radio"  name="q1" value=8>8<br>
+            <input type="radio"  name="q1" value=9>9<br>
+            <br><br>
+        <h4>2.No of States in India</h4><br>
+            <input type="radio"  name="q2" value=28>28<br>
+            <input type="radio"  name="q2" value=27>27<br>
+            <input type="radio"  name="q2" value=29>29<br>
+            <input type="radio"  name="q2" value=26>26<br>
+        <br><br>
+
+        <h4>3.No of union territories in India</h4><br>
+            <input type="radio"  name="q3" value=6>6<br>
+            <input type="radio"  name="q3" value=7>7<br>
+            <input type="radio"  name="q3" value=8>8<br>
+            <input type="radio"  name="q3" value=9>9<br>
+            <br><br>
+        <h4>4.Programmer counting starts from</h4><br>
+            <input type="radio"  name="q4" value=1>1<br>
+            <input type="radio"  name="q4" value=0>0<br>
+            <input type="radio"  name="q4" value=3>3<br>
+            <input type="radio"  name="q4" value=8>8<br>
+        <br><br>
+        <h4>5.Time at which conjuring ghost is activated</h4><br>
+            <input type="radio"  name="q5" value=4>4 pm<br>
+            <input type="radio"  name="q5" value=5>5 pm<br>
+            <input type="radio"  name="q5" value=3>3 am<br>
+            <input type="radio"  name="q5" value=1>1 am<br>
+            <br><br>
+        <button onclick="Result()">Submit</button>
+    </body>
+</html>
+-------------------------------------------------------------
+<form  ng-app="mainApp"  ng-controller="loginController"
+name="myForm" ng-submit="valid()" novalidate>
+
+<p>Username:<br>
+  <input type="name" name="name" ng-model="name" required>
+  <span style="color:red" ng-show="myForm.name.$dirty && myForm.name.$invalid">
+  <span ng-show="myForm.name.$error.required">username is required.</span>
+  </span>
+</p>
+
+<p>Email:<br>
+  <input type="email" name="email" ng-model="email" required>
+  <span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
+  <span ng-show="myForm.email.$error.required">Email is required.</span>
+  
+  </span>
+</p>
+
+<input  type="submit">
+
+</form>
+------------------------------------------------------
+<script src="login.js"></script>
+<div ng-app="mainApp">
+    <h1>Dinesh Gat</h1>
+</div>
+----------------------------
+<html>
+	<head lang="en">
+	  <meta charset="utf-8">
+	  <title>AngularJS Routing</title>
+
+	</head>
+	<body>
+
+	  <div ng-app="mainApp">
+	  
+		<ng-view></ng-view>
+	  </div>
+
+	  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28/angular.min.js"></script>
+	  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.28//angular-route.min.js"></script>
+	  <script type="text/javascript" src="login.js"></script>
+	</body>
+</html>
+----------------------------------------
+<div>
+<a href="#/login">login</a><br>
+<a href="#/contact">Contact us</a>
+</div>
+-----------------------------
+
+
+
+
+var mainApp = angular.module("mainApp", ['ngRoute']);
+
+mainApp.config(function($routeProvider) {
+    $routeProvider
+    .when('/', {
+        templateUrl: 'setb.html',
+        
+    })
+		.when('/login', {
+			templateUrl: 'loginn.html',
+			controller: 'loginController'
+		})
+		.when('/contact', {
+			templateUrl: 'contact.html',
+			
+		})
+		.otherwise({
+			redirectTo: '/'
+		});
+});
+
+mainApp.controller('loginController', function($scope,$location) {
+	$scope.user=myForm.name;
+	$scope.email=myForm.email;
+
+	if($scope.user=="admin" && $scope.email=="dinesh@gmail.com")
+	{
+		$location.path("/login");
+	}
+
+});
+
+
+
