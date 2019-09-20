@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <title>Palindrome</title>
+        <script type="text/javascript">
+            function Check_palindrome()
+            {
+                var s=document.getElementById('str').value
+                var len=s.length
+                len=parseInt(len/2)
+                var i=0,flag=0
+                while(i<len)
+                {
+                    // document.write(s[i])
+                    if(s[i]!=s[s.length-i-1])
+                    {
+                        flag=1
+                        break
+                    }
+                        i++;
+                }
+                if(flag==1)
+                    document.write("No a palindrome")
+                else
+                    document.write("Palindrome")
+                
+
+            }
+        </script>
+    </head>
+    <body>
+        Enter string to check Palindrome : <input type="text" id="str" name="str">
+        <button onclick="Check_palindrome()">Check</button>
+    </body>
+</html>
